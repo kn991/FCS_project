@@ -1,5 +1,6 @@
 ﻿fastapi
-uvicorn
+uvicorn[standard]
 sqlalchemy
 psycopg2
 python-dotenv
+requests

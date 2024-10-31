@@ -10,7 +10,7 @@ class UserResponse(BaseModel):
     created_at: datetime
 
 
-class UserCreate(BaseModel):  # Schema for creating a new user (excluding user_id)
+class UserCreate(BaseModel):  
     username: str
     email: str
     password_hash: str
@@ -19,7 +19,7 @@ class UserCreate(BaseModel):  # Schema for creating a new user (excluding user_i
 class ProductResponse(BaseModel):
     product_id: int
     name: str
-    description: str | None = None  # Optional description
+    description: str | None = None  
     price: Decimal
     created_at: datetime
 
@@ -37,7 +37,7 @@ class OrderItemResponse(BaseModel):
     quantity: int
 
 
-class OrderItemCreate(BaseModel):  # For creating OrderItems
+class OrderItemCreate(BaseModel):  
     product_id: int
     quantity: int
 
@@ -49,6 +49,6 @@ class OrderResponse(BaseModel):
     total_amount: Decimal
 
 
-class OrderCreate(BaseModel):  # Don't include order_id in the request
+class OrderCreate(BaseModel):  
     user_id: int
     total_amount: Decimal
