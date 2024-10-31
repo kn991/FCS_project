@@ -1,9 +1,10 @@
 from sqlalchemy.orm import Session
-from models import User, Product, Order, OrderItem
+from app.database.models import User, Product, Order, OrderItem
 
 
 def create_user(db: Session, username: str, email: str, password_hash: str):
-    new_user = User(username=username, email=email, password_hash=password_hash)
+    new_user = User(username=username, email=email,
+                    password_hash=password_hash)
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
@@ -48,7 +49,8 @@ def get_product(db: Session, product_id: int):
 
 
 def update_product(db: Session, product_id: int, name: str = None, description: str = None, price: float = None):
-    product = db.query(Product).filter(Product.product_id == product_id).first()
+    product = db.query(Product).filter(
+        Product.product_id == product_id).first()
     if product:
         if name:
             product.name = name
@@ -62,7 +64,8 @@ def update_product(db: Session, product_id: int, name: str = None, description: 
 
 
 def delete_product(db: Session, product_id: int):
-    product = db.query(Product).filter(Product.product_id == product_id).first()
+    product = db.query(Product).filter(
+        Product.product_id == product_id).first()
     if product:
         db.delete(product)
         db.commit()
@@ -102,7 +105,8 @@ def delete_order(db: Session, order_id: int):
 
 # OrderItem CRUD Operations
 def create_order_item(db: Session, order_id: int, product_id: int, quantity: int):
-    new_order_item = OrderItem(order_id=order_id, product_id=product_id, quantity=quantity)
+    new_order_item = OrderItem(
+        order_id=order_id, product_id=product_id, quantity=quantity)
     db.add(new_order_item)
     db.commit()
     db.refresh(new_order_item)
@@ -114,7 +118,8 @@ def get_order_item(db: Session, orderitemid: int):
 
 
 def update_order_item(db: Session, orderitemid: int, quantity: int = None):
-    order_item = db.query(OrderItem).filter(OrderItem.orderitemid == orderitemid).first()
+    order_item = db.query(OrderItem).filter(
+        OrderItem.orderitemid == orderitemid).first()
     if order_item:
         if quantity:
             order_item.quantity = quantity
@@ -124,7 +129,8 @@ def update_order_item(db: Session, orderitemid: int, quantity: int = None):
 
 
 def delete_order_item(db: Session, orderitemid: int):
-    order_item = db.query(OrderItem).filter(OrderItem.orderitemid == orderitemid).first()
+    order_item = db.query(OrderItem).filter(
+        OrderItem.orderitemid == orderitemid).first()
     if order_item:
         db.delete(order_item)
         db.commit()

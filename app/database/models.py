@@ -1,5 +1,6 @@
 import os
-from sqlalchemy import create_engine, Column, Integer, String, Decimal, DateTime, ForeignKey
+from sqlalchemy import create_engine, Column, Integer, String, DateTime, ForeignKey
+from sqlalchemy.types import DECIMAL as Decimal  # Import Decimal from sqlalchemy.types
 from sqlalchemy.orm import declarative_base, sessionmaker
 from sqlalchemy.ext.declarative import declared_attr
 from datetime import datetime
@@ -47,6 +48,6 @@ class OrderItem(Base):
 
 POSTGRES_USER = os.getenv("POSTGRES_USER")
 POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD")
-DATABASE_URL = f"postgresql://{POSTGRES_USER}:f{POSTGRES_PASSWORD}@localhost/ecommerce"
+DATABASE_URL = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@localhost/ecommerce"
 engine = create_engine(DATABASE_URL)
 Session = sessionmaker(bind=engine)
